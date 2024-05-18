@@ -1,4 +1,4 @@
-# 🕹️ Hoppy's Escape
+# 🕹️ House Burn
 
 ## 👨🏻‍💻 Description
 House Burn est un jeu en Python où vous incarnez Jean, un homme qui essaie de brûler l'hôtel de ville de son village. Pour ce faire, il devra résoudre des énigmes afin de pouvoir traverser le village en toute tranquilité. Cependant, le chemin n'est peut-être pas aussi simple qu'une flamme éclairant la nuit...
