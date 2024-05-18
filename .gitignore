@@ -1,0 +1,209 @@
+house_burn
+
+# Ignorer le fichier lui-même
+#.gitignore
+
+# Ignorer les fichiers spécifiques à C et C++
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.out
+*.obj
+*.dSYM/
+*.gcno
+*.gcda
+*.gch
+*.suo
+*.pdb
+*.idb
+*.ilk
+*.manifest
+*.ilk
+*.mod
+*.smod
+*.o.d
+*.obj.d
+*.gcno
+*.gcda
+*.ilk
+*.ncb
+*.pch
+*.pdb
+*.rsp
+*.sbr
+*.exp
+*.lib
+*.dll.a
+*.dll.lib
+*.dll.exp
+*.exe.stackdump
+*.log
+
+# Ignorer les fichiers générés par le système d'exploitation
+.DS_Store
+Thumbs.db
+
+# Ignorer les fichiers temporaires
+*~
+*.swp
+*.swo
+*.bak
+*.pyc
+
+# Ignorer les fichiers de configuration d'éditeur
+.vscode/
+.idea/
+*.sublime-*
+
+# Ignorer les fichiers de dépendances
+/node_modules/
+/vendor/
+
+# Ignorer les fichiers de build
+/build/
+/dist/
+/out/
+/.cache/
+
+# Ignorer les fichiers spécifiques aux langages de programmation
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.out
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.gz
+*.idx
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.nlo
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+*.log
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.maf
+*.mtc
+*.mtc0
+*.nav
+*.nlo
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.xdv
+*.ist
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.fls
+*.xdy
+*.loa
+*.lox
+*.tdo
+*.fdb_latexmk
+
+# Ignorer les fichiers de configuration spécifiques aux projets
+*.iml
+*.env
+*.env.local
+.env.local.php
+.env.*.local
+.env.*.local.php
+.env.php
+.env.*.php
+.env.test
+.env.test.php
+.env.*.test.php
+.env.prod
+.env.prod.php
+.env.*.prod.php
+
+# Ignorer les fichiers de sauvegarde
+*.bak
+*.back
+*.old
+*.orig
+
+# Ignorer les fichiers de cache
+*.cache
+*.css.map
+*.min.js
+*.min.css
+
+# Ignorer les fichiers de logs
+*.log
+
+# Ignorer les fichiers de statistiques
+*.stats
+
+# Ignorer les fichiers de sauvegarde
+*.backup
+*.swp
+
+# Ignorer les fichiers de test
+*.test
+*.spec
+*.mock
+
+# Ignorer les fichiers de sauvegarde Emacs
+*~
+#*#
+.#*
+._*
+
+# Ignorer les fichiers de configuration
+*.conf
+*.conf.d
+*.cfg
+*.yaml
+*.yml
+*.json
+*.env
+
+# Ignorer les fichiers de base de données
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+
+# Ignorer les fichiers de virtualenv
+venv/
+env/
+
+# Ignorer les fichiers de cache Python
+__pycache__/
