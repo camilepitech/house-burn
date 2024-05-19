@@ -31,6 +31,8 @@ pygame.init()
 screen = pygame.display.set_mode(WIN_SIZE)
 pygame.display.set_caption('House Burn')
 
+house_image = pygame.image.load('resources/house.png')
+house_rect = house_image.get_rect()
 map_image = pygame.image.load('resources/map.png')
 map_rect = map_image.get_rect()
 character_image = pygame.image.load('resources/player.png')
@@ -47,6 +49,7 @@ cans = 0
 max_cans = 7
 already_printed = False
 start_time = None
+start_house_time = None
 player_burnt = False
 
 my_dict = {
