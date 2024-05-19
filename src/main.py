@@ -17,11 +17,14 @@ WIN_SIZE = 1000, 1000
 PLAYER_SIZE = 80, 80
 PLAYER_INIT_POS = 470, 845
 TILE_SIZE = 100
+CAN_SIZE = 50, 50
 
 STATE_START_MENU = 0
 STATE_PLAYING = 1
 STATE_FINISHED = 2
 STATE_DEAD = 3
+
+TIMER = 25
 
 pygame.init()
 screen = pygame.display.set_mode(WIN_SIZE)
@@ -35,7 +38,7 @@ character_rect = character_image.get_rect()
 character_rect.topleft = PLAYER_INIT_POS
 character_speed = 5
 bidon_image = pygame.image.load('resources/bidon.png')
-bidon_image = pygame.transform.scale(bidon_image, (100, 100))
+bidon_image = pygame.transform.scale(bidon_image, CAN_SIZE)
 bidon_rect = bidon_image.get_rect()
 
 font = pygame.font.Font(None, 50)
@@ -202,7 +205,7 @@ def main():
         elif game_state == STATE_PLAYING:
             current_time = time.time()
             elapsed_time = current_time - start_time
-            remaining_time = max(0, int(25 - elapsed_time))
+            remaining_time = max(0, int(TIMER - elapsed_time))
 
             if remaining_time <= 0:
                 game_state = STATE_DEAD
