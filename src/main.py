@@ -87,6 +87,14 @@ def finish_screen():
     screen.blit(prompt_text, (WIN_SIZE[0] // 2 - prompt_text.get_width() // 2, WIN_SIZE[1] // 2 - prompt_text.get_height() // 2 + 150))
     pygame.display.flip()
 
+def death_screen():
+    screen.fill((0, 0, 0))
+    death_text = font.render("You Died!", True, (255, 0, 0))
+    screen.blit(death_text, (WIN_SIZE[0] // 2 - death_text.get_width() // 2, WIN_SIZE[1] // 2 - death_text.get_height() // 2))
+    prompt_text = font.render("Press ENTER to restart", True, (255, 255, 255))
+    screen.blit(prompt_text, (WIN_SIZE[0] // 2 - prompt_text.get_width() // 2, WIN_SIZE[1] // 2 - prompt_text.get_height() // 2 + 50))
+    pygame.display.flip()
+
 def show_message(value):
     global cans, already_printed, game_state
     if value == '9' and cans < max_cans:
