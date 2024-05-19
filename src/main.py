@@ -116,7 +116,7 @@ def death_screen():
     pygame.display.flip()
 
 def show_message(value):
-    global cans, already_printed, game_state
+    global cans, already_printed, game_state, start_house_time
     if value == '9' and cans < max_cans:
         root = tk.Tk()
         root.withdraw()
@@ -127,6 +127,7 @@ def show_message(value):
         return
     elif value == '9' and cans == max_cans:
         game_state = STATE_IN_HOUSE
+        start_house_time = time.time()
         return
     if my_dict[value] == False:
         cans += 1
