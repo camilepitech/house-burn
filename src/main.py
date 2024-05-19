@@ -16,7 +16,9 @@ import time
 WIN_SIZE = 1000, 1000
 PLAYER_SIZE = 80, 80
 PLAYER_INIT_POS = 470, 845
+PLAYER_INIT_HOUSE_POS = 600, 845
 TILE_SIZE = 100
+HOUSE_TILE_SIZE = 34
 CAN_SIZE = 50, 50
 TIMER = 30
 HOUSE_TIMER = 45
@@ -116,7 +118,7 @@ def death_screen():
     pygame.display.flip()
 
 def show_message(value):
-    global cans, already_printed, game_state, start_house_time
+    global cans, already_printed, game_state, start_house_time, PLAYER_INIT_HOUSE_POS
     if value == '9' and cans < max_cans:
         root = tk.Tk()
         root.withdraw()
@@ -128,6 +130,7 @@ def show_message(value):
     elif value == '9' and cans == max_cans:
         game_state = STATE_IN_HOUSE
         start_house_time = time.time()
+        character_rect.topleft = PLAYER_INIT_HOUSE_POS
         return
     if my_dict[value] == False:
         cans += 1
@@ -292,7 +295,7 @@ def main():
             if keys[pygame.K_DOWN]:
                 character_rect.y += character_speed
 
-            if not house_rect.contains(character_rect) or check_collision(house_collision_map, character_rect, TILE_SIZE):
+            if not house_rect.contains(character_rect) or check_collision(house_collision_map, character_rect, HOUSE_TILE_SIZE):
                 character_rect.topleft = old_position
 
             screen.fill((0, 0, 0))
