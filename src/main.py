@@ -204,7 +204,7 @@ def burn_jean_luc():
     player_burnt = True
 
 def main():
-    global cans, already_printed, game_state, start_time
+    global cans, already_printed, game_state, start_time, start_house_time
     clock = pygame.time.Clock()
     game_state = STATE_START_MENU
 
@@ -268,6 +268,36 @@ def main():
             screen.blit(character_image, character_rect.topleft)
             print_bidon(collision_map)
             draw_score(cans, max_cans)
+            draw_timer(remaining_time)
+
+            pygame.display.flip()
+            clock.tick(60)
+        elif game_state == STATE_IN_HOUSE:
+            current_time = time.time()
+            elapsed_time = current_time - start_house_time
+            remaining_time = max(0, int(HOUSE_TIMER - elapsed_time))
+
+            if remaining_time <= 0:
+                game_state = STATE_DEAD
+
+            keys = pygame.key.get_pressed()
+            old_position = character_rect.topleft
+
+            if keys[pygame.K_LEFT]:
+                character_rect.x -= character_speed
+            if keys[pygame.K_RIGHT]:
+                character_rect.x += character_speed
+            if keys[pygame.K_UP]:
+                character_rect.y -= character_speed
+            if keys[pygame.K_DOWN]:
+                character_rect.y += character_speed
+
+            if not house_rect.contains(character_rect) or check_collision(house_collision_map, character_rect, TILE_SIZE):
+                character_rect.topleft = old_position
+
+            screen.fill((0, 0, 0))
+            screen.blit(house_image, house_rect.topleft)
+            screen.blit(character_image, character_rect.topleft)
             draw_timer(remaining_time)
 
             pygame.display.flip()
