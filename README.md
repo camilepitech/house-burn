@@ -1,7 +1,7 @@
 # 🕹️ House Burn
 
 ## 👨🏻‍💻 Description
-House Burn est un jeu en Python où vous incarnez Jean, un homme qui essaie de brûler l'hôtel de ville de son village. Pour ce faire, il devra résoudre des énigmes afin de pouvoir traverser le village en toute tranquilité. Cependant, le chemin n'est peut-être pas aussi simple qu'une flamme éclairant la nuit...
+House Burn est un jeu en Python où vous incarnez Jean-Luc, un homme qui essaie de brûler l'hôtel de ville de son village, pour des raisons un peu sombres. Pour ce faire, il devra ramasser des bidons d'essence afin d'incendier de manière efficace le bâtiment. Cependant, le chemin n'est peut-être pas aussi simple qu'une flamme éclairant la nuit...
 
 ## 📂 Installation
 1. Assurez-vous d'avoir Python installé. Si ce n'est pas le cas, vous pouvez le télécharger depuis [le site officiel de Python](https://www.python.org/). Pour l'installer directement sur Fedora :
@@ -9,7 +9,7 @@ House Burn est un jeu en Python où vous incarnez Jean, un homme qui essaie de b
     ```
     sudo dnf install python
     ```
-2. Clonez ce repo sur votre machine :
+2. Clonez le repository :
 
     ```
     git clone https://github.com/camilepitech/hoppys-escape.git
@@ -32,7 +32,7 @@ House Burn est un jeu en Python où vous incarnez Jean, un homme qui essaie de b
 6. Lancez le jeu en exécutant le fichier :
 
     ```
-    ./house_burn.py
+    ./house_burn
     ```
 
 ## ⌨️ Contrôles
