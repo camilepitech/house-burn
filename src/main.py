@@ -21,7 +21,7 @@ TILE_SIZE = 100
 STATE_START_MENU = 0
 STATE_PLAYING = 1
 STATE_FINISHED = 2
-STATE_DEAD = 3  # Nouvel état pour l'écran de mort
+STATE_DEAD = 3
 
 pygame.init()
 screen = pygame.display.set_mode(WIN_SIZE)
@@ -106,7 +106,7 @@ def show_message(value):
         character_rect.x += 110
         return
     elif value == '9' and cans == max_cans:
-        game_state = STATE_FINISHED  # Passer à l'état de fin de jeu
+        game_state = STATE_FINISHED
         return
     if my_dict[value] == False:
         cans += 1
@@ -166,7 +166,7 @@ def main():
             if game_state == STATE_START_MENU:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                     game_state = STATE_PLAYING
-                    start_time = time.time()  # Initialiser le timer au début du jeu
+                    start_time = time.time()
             elif game_state == STATE_FINISHED:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                     game_state = STATE_START_MENU
@@ -214,7 +214,7 @@ def main():
             screen.blit(character_image, character_rect.topleft)
             print_bidon(collision_map, bidon_rect)
             draw_score(cans, max_cans)
-            draw_timer(remaining_time)  # Dessiner le timer
+            draw_timer(remaining_time)
 
             pygame.display.flip()
             clock.tick(60)
