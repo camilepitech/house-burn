@@ -18,13 +18,12 @@ PLAYER_SIZE = 80, 80
 PLAYER_INIT_POS = 470, 845
 TILE_SIZE = 100
 CAN_SIZE = 50, 50
+TIMER = 30
 
 STATE_START_MENU = 0
 STATE_PLAYING = 1
 STATE_FINISHED = 2
 STATE_DEAD = 3
-
-TIMER = 25
 
 pygame.init()
 screen = pygame.display.set_mode(WIN_SIZE)
@@ -46,6 +45,7 @@ cans = 0
 max_cans = 7
 already_printed = False
 start_time = None
+player_burnt = False
 
 my_dict = {
     "2": False,
@@ -167,6 +167,35 @@ def print_bidon(collision_map):
             if cell_value in '2345678' and not my_dict[cell_value]:
                 screen.blit(bidon_image, (x * TILE_SIZE, y * TILE_SIZE))
 
+def burn_jean_luc():
+    global player_burnt
+    if player_burnt:
+        return
+    flames = []
+    for i in range(1, 5):
+        flame = pygame.image.load(f"resources/flame{i}.png")
+        flame = pygame.transform.scale(flame, PLAYER_SIZE)
+        flames.append(flame)
+    flame_index = 0
+    flame_speed = 100
+    duration = 5000
+    clock = pygame.time.Clock()
+    start_time = pygame.time.get_ticks()
+
+    while pygame.time.get_ticks() - start_time < duration:
+        screen.fill((0, 0, 0))
+        screen.blit(map_image, map_rect.topleft)
+        screen.blit(character_image, character_rect.topleft)
+        print_bidon(collision_map)
+        draw_score(cans, max_cans)
+        draw_timer(0)
+
+        screen.blit(flames[flame_index], character_rect.topleft)
+        flame_index = (flame_index + 1) % len(flames)
+        pygame.display.flip()
+        clock.tick(1000 // flame_speed)
+    player_burnt = True
+
 def main():
     global cans, already_printed, game_state, start_time
     clock = pygame.time.Clock()
@@ -237,6 +266,7 @@ def main():
         elif game_state == STATE_FINISHED:
             finish_screen()
         elif game_state == STATE_DEAD:
+            burn_jean_luc()
             death_screen()
 
 if __name__ == "__main__":
