@@ -16,6 +16,9 @@ WIN_SIZE = 1000, 1000
 PLAYER_SIZE = 80, 80
 PLAYER_INIT_POS = 470, 845
 TILE_SIZE = 100
+STATE_START_MENU = 0
+STATE_PLAYING = 1
+STATE_FINISHED = 2
 
 pygame.init()
 screen = pygame.display.set_mode(WIN_SIZE)
@@ -58,8 +61,7 @@ def load_collision_map(filename):
         return [list(line.strip()) for line in file]
 
 def show_message(value):
-    global cans
-    global already_printed
+    global cans, already_printed, game_state
     if value == '9' and cans < max_cans:
         root = tk.Tk()
         root.withdraw()
@@ -69,7 +71,8 @@ def show_message(value):
         character_rect.x += 110
         return
     elif value == '9' and cans == max_cans:
-        print("launching house burn mini game") #start the mini game here
+        game_state = STATE_FINISHED  # Passer à l'état de fin de jeu
+        return
     if my_dict[value] == False:
         cans += 1
         my_dict[value] = True
@@ -114,8 +117,18 @@ def print_bidon(collision_map, rect):
             if cell_value in '2345678' and not my_dict[cell_value]:
                 screen.blit(bidon_image, (x * TILE_SIZE, y * TILE_SIZE))
 
+def start_menu():
+    screen.fill((0, 0, 0))
+    title_text = font.render("House Burn", True, (255, 0, 0))
+    prompt_text = font.render("Press ENTER to start", True, (255, 255, 255))
+    screen.blit(title_text, (WIN_SIZE[0] // 2 - title_text.get_width() // 2, WIN_SIZE[1] // 2 - title_text.get_height() // 2 - 50))
+    screen.blit(prompt_text, (WIN_SIZE[0] // 2 - prompt_text.get_width() // 2, WIN_SIZE[1] // 2 - prompt_text.get_height() // 2 + 50))
+    pygame.display.flip()
+
 def main():
+    global cans, already_printed
     clock = pygame.time.Clock()
+    game_state = STATE_START_MENU
 
     while True:
         for event in pygame.event.get():
@@ -123,29 +136,46 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-        keys = pygame.key.get_pressed()
-        old_position = character_rect.topleft
+            if game_state == STATE_START_MENU:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                    game_state = STATE_PLAYING
+            elif game_state == STATE_FINISHED:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+                    game_state = STATE_START_MENU
+                    cans = 0
+                    already_printed = False
+                    my_dict = {str(i): False for i in range(2, 9)}
+                    my_dict["9"] = True
+                    character_rect.topleft = PLAYER_INIT_POS
 
-        if keys[pygame.K_LEFT]:
-            character_rect.x -= character_speed
-        if keys[pygame.K_RIGHT]:
-            character_rect.x += character_speed
-        if keys[pygame.K_UP]:
-            character_rect.y -= character_speed
-        if keys[pygame.K_DOWN]:
-            character_rect.y += character_speed
+        if game_state == STATE_START_MENU:
+            start_menu()
+        elif game_state == STATE_PLAYING:
+            keys = pygame.key.get_pressed()
+            old_position = character_rect.topleft
 
-        if not map_rect.contains(character_rect) or check_collision(collision_map, character_rect, TILE_SIZE):
-            character_rect.topleft = old_position
+            if keys[pygame.K_LEFT]:
+                character_rect.x -= character_speed
+            if keys[pygame.K_RIGHT]:
+                character_rect.x += character_speed
+            if keys[pygame.K_UP]:
+                character_rect.y -= character_speed
+            if keys[pygame.K_DOWN]:
+                character_rect.y += character_speed
 
-        screen.fill((0, 0, 0))
-        screen.blit(map_image, map_rect.topleft)
-        screen.blit(character_image, character_rect.topleft)
-        print_bidon(collision_map, bidon_rect)
-        draw_score(cans, max_cans)
+            if not map_rect.contains(character_rect) or check_collision(collision_map, character_rect, TILE_SIZE):
+                character_rect.topleft = old_position
 
-        pygame.display.flip()
-        clock.tick(60)
+            screen.fill((0, 0, 0))
+            screen.blit(map_image, map_rect.topleft)
+            screen.blit(character_image, character_rect.topleft)
+            print_bidon(collision_map, bidon_rect)
+            draw_score(cans, max_cans)
+
+            pygame.display.flip()
+            clock.tick(60)
+        elif game_state == STATE_FINISHED:
+            finish_screen()
 
 if __name__ == "__main__":
     main()
