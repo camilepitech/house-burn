@@ -19,11 +19,13 @@ PLAYER_INIT_POS = 470, 845
 TILE_SIZE = 100
 CAN_SIZE = 50, 50
 TIMER = 30
+HOUSE_TIMER = 45
 
 STATE_START_MENU = 0
 STATE_PLAYING = 1
 STATE_FINISHED = 2
 STATE_DEAD = 3
+STATE_IN_HOUSE = 4
 
 pygame.init()
 screen = pygame.display.set_mode(WIN_SIZE)
@@ -121,7 +123,7 @@ def show_message(value):
         character_rect.x += 110
         return
     elif value == '9' and cans == max_cans:
-        game_state = STATE_FINISHED
+        game_state = STATE_IN_HOUSE
         return
     if my_dict[value] == False:
         cans += 1
