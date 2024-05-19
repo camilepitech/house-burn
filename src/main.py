@@ -154,7 +154,7 @@ def check_collision(collision_map, rect, tile_size):
 
 collision_map = load_collision_map('resources/collisions.txt')
 
-def print_bidon(collision_map, rect):
+def print_bidon(collision_map):
     map_height = len(collision_map)
     map_width = len(collision_map[0])
 
@@ -170,6 +170,7 @@ def main():
     game_state = STATE_START_MENU
 
     while True:
+        global my_dict
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -224,7 +225,7 @@ def main():
             screen.fill((0, 0, 0))
             screen.blit(map_image, map_rect.topleft)
             screen.blit(character_image, character_rect.topleft)
-            print_bidon(collision_map, bidon_rect)
+            print_bidon(collision_map)
             draw_score(cans, max_cans)
             draw_timer(remaining_time)
 
