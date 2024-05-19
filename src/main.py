@@ -104,6 +104,16 @@ def check_collision(collision_map, rect, tile_size):
 
 collision_map = load_collision_map('resources/collisions.txt')
 
+def print_bidon(collision_map, rect):
+    map_height = len(collision_map)
+    map_width = len(collision_map[0])
+
+    for y in range(map_height):
+        for x in range(map_width):
+            cell_value = collision_map[y][x]
+            if cell_value in '2345678' and not my_dict[cell_value]:
+                screen.blit(bidon_image, (x * TILE_SIZE, y * TILE_SIZE))
+
 def main():
     clock = pygame.time.Clock()
 
