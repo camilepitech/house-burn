@@ -162,6 +162,7 @@ def check_collision(collision_map, rect, tile_size):
     return False
 
 collision_map = load_collision_map('resources/collisions.txt')
+house_collision_map = load_collision_map('resources/house_collisions.txt')
 
 def print_bidon(collision_map):
     map_height = len(collision_map)
