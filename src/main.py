@@ -125,6 +125,15 @@ def start_menu():
     screen.blit(prompt_text, (WIN_SIZE[0] // 2 - prompt_text.get_width() // 2, WIN_SIZE[1] // 2 - prompt_text.get_height() // 2 + 50))
     pygame.display.flip()
 
+def finish_screen():
+    screen.fill((0, 0, 0))
+    congrats_text = font.render("Congratulations!", True, (255, 255, 0))
+    done_text = font.render("You have burned the house!", True, (255, 255, 255))
+    screen.blit(congrats_text, (WIN_SIZE[0] // 2 - congrats_text.get_width() // 2, WIN_SIZE[1] // 2 - congrats_text.get_height() // 2 - 50))
+    screen.blit(done_text, (WIN_SIZE[0] // 2 - done_text.get_width() // 2, WIN_SIZE[1] // 2 - done_text.get_height() // 2 + 50))
+    pygame.display.flip()
+
+
 def main():
     global cans, already_printed
     clock = pygame.time.Clock()
