@@ -203,6 +203,7 @@ def main():
 
     while True:
         global my_dict
+        global player_burnt
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -224,6 +225,7 @@ def main():
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                     game_state = STATE_START_MENU
                     cans = 0
+                    player_burnt = False
                     already_printed = False
                     my_dict = {str(i): False for i in range(2, 9)}
                     my_dict["9"] = True
