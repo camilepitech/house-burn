@@ -28,10 +28,14 @@ character_image = pygame.transform.scale(character_image, PLAYER_SIZE)
 character_rect = character_image.get_rect()
 character_rect.topleft = PLAYER_INIT_POS
 character_speed = 5
+bidon_image = pygame.image.load('resources/bidon.png')
+bidon_image = pygame.transform.scale(bidon_image, (100, 100))
+bidon_rect = bidon_image.get_rect()
 
 font = pygame.font.Font(None, 50)
 cans = 0
 max_cans = 7
+already_printed = False
 
 my_dict = {
     "2": False,
@@ -40,7 +44,8 @@ my_dict = {
     "5": False,
     "6": False,
     "7": False,
-    "8": False
+    "8": False,
+    "9": True
 }
 
 def draw_score(score, max_score):
@@ -54,6 +59,7 @@ def load_collision_map(filename):
 
 def show_message(value):
     global cans
+    global already_printed
     if value == '9' and cans < max_cans:
         root = tk.Tk()
         root.withdraw()
@@ -67,7 +73,8 @@ def show_message(value):
     if my_dict[value] == False:
         cans += 1
         my_dict[value] = True
-    if cans == max_cans:
+    if cans == max_cans and already_printed == False:
+        already_printed = True
         root = tk.Tk()
         root.withdraw()
         message = "You have collected all the petrol cans! You can now burn the house!"
@@ -124,6 +131,7 @@ def main():
         screen.fill((0, 0, 0))
         screen.blit(map_image, map_rect.topleft)
         screen.blit(character_image, character_rect.topleft)
+        print_bidon(collision_map, bidon_rect)
         draw_score(cans, max_cans)
 
         pygame.display.flip()
