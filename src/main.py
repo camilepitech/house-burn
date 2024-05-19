@@ -164,6 +164,25 @@ def check_collision(collision_map, rect, tile_size):
                 return False
     return False
 
+def check_house_collision(collision_map, rect, tile_size):
+    map_height = len(collision_map)
+    map_width = len(collision_map[0])
+
+    positions = [
+        (rect.left // tile_size, rect.top // tile_size),
+        (rect.right // tile_size, rect.top // tile_size),
+        (rect.left // tile_size, rect.bottom // tile_size),
+        (rect.right // tile_size, rect.bottom // tile_size)
+    ]
+
+    for pos in positions:
+        if 0 <= pos[1] < map_height and 0 <= pos[0] < map_width:
+            cell_value = collision_map[pos[1]][pos[0]]
+            if cell_value == '1':
+                return True
+            burn_cell()
+    return False
+
 collision_map = load_collision_map('resources/collisions.txt')
 house_collision_map = load_collision_map('resources/house_collisions.txt')
 
