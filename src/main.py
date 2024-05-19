@@ -225,6 +225,16 @@ def burn_jean_luc():
         clock.tick(1000 // flame_speed)
     player_burnt = True
 
+def burn_cell():
+    flame_images = [pygame.transform.scale(pygame.image.load(f"resources/flame{i}.png"), PLAYER_SIZE) for i in range(1, 5)]
+    flame_rect = pygame.Rect(character_rect.topleft, PLAYER_SIZE)
+    flames.append((flame_images, flame_rect, 0))
+
+def draw_flames(flames):
+    for flame_images, rect, index in flames:
+        screen.blit(flame_images[index], rect.topleft)
+        flames[flames.index((flame_images, rect, index))] = (flame_images, rect, (index + 1) % len(flame_images))
+
 def main():
     global cans, already_printed, game_state, start_time, start_house_time
     clock = pygame.time.Clock()
