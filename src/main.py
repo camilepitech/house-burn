@@ -21,7 +21,7 @@ TILE_SIZE = 100
 HOUSE_TILE_SIZE = 34
 CAN_SIZE = 50, 50
 TIMER = 30
-HOUSE_TIMER = 45
+HOUSE_TIMER = 15
 
 STATE_START_MENU = 0
 STATE_PLAYING = 1
@@ -53,6 +53,7 @@ already_printed = False
 start_time = None
 start_house_time = None
 player_burnt = False
+flames = []
 
 my_dict = {
     "2": False,
@@ -236,7 +237,7 @@ def draw_flames(flames):
         flames[flames.index((flame_images, rect, index))] = (flame_images, rect, (index + 1) % len(flame_images))
 
 def main():
-    global cans, already_printed, game_state, start_time, start_house_time
+    global cans, already_printed, game_state, start_time, start_house_time, flames
     clock = pygame.time.Clock()
     game_state = STATE_START_MENU
 
@@ -310,7 +311,7 @@ def main():
             remaining_time = max(0, int(HOUSE_TIMER - elapsed_time))
 
             if remaining_time <= 0:
-                game_state = STATE_DEAD
+                game_state = STATE_FINISHED
 
             keys = pygame.key.get_pressed()
             old_position = character_rect.topleft
@@ -324,13 +325,14 @@ def main():
             if keys[pygame.K_DOWN]:
                 character_rect.y += character_speed
 
-            if not house_rect.contains(character_rect) or check_collision(house_collision_map, character_rect, HOUSE_TILE_SIZE):
+            if not house_rect.contains(character_rect) or check_house_collision(house_collision_map, character_rect, HOUSE_TILE_SIZE):
                 character_rect.topleft = old_position
 
             screen.fill((0, 0, 0))
             screen.blit(house_image, house_rect.topleft)
             screen.blit(character_image, character_rect.topleft)
             draw_timer(remaining_time)
+            draw_flames(flames)
 
             pygame.display.flip()
             clock.tick(60)
