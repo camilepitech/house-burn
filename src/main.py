@@ -72,9 +72,21 @@ def load_collision_map(filename):
 def start_menu():
     screen.fill((0, 0, 0))
     title_text = font.render("House Burn", True, (255, 0, 0))
-    prompt_text = font.render("Press ENTER to start", True, (255, 255, 255))
+    prompt_text = font.render("La femme de Jean-Luc, qu il aimais avec les ", True, (255, 255, 255))
+    a_text = font.render("flammes de l amours, a été brulée au bucher pour sorcellerie.", True, (255, 255, 255))
+    b_text = font.render("Animé par les flammes de la vengance, vous devrez ", True, (255, 255, 255))
+    c_text = font.render("bruler la mairie en haut a gauche.", True, (255, 255, 255))
+    d_text = font.render("Récuperez les bidons sur la map, mais faites vite!", True, (255, 255, 255))
+    e_text = font.render(" ou les flammes de la vengeance en vous s eteindront.", True, (255, 255, 255))
+    f_text = font.render("Press ENTER to start", True, (255, 255, 255))
     screen.blit(title_text, (WIN_SIZE[0] // 2 - title_text.get_width() // 2, WIN_SIZE[1] // 2 - title_text.get_height() // 2 - 50))
     screen.blit(prompt_text, (WIN_SIZE[0] // 2 - prompt_text.get_width() // 2, WIN_SIZE[1] // 2 - prompt_text.get_height() // 2 + 50))
+    screen.blit(a_text, (WIN_SIZE[0] // 2 - a_text.get_width() // 2, WIN_SIZE[1] // 2 - a_text.get_height() // 2 + 80))
+    screen.blit(b_text, (WIN_SIZE[0] // 2 - b_text.get_width() // 2, WIN_SIZE[1] // 2 - b_text.get_height() // 2 + 110))
+    screen.blit(c_text, (WIN_SIZE[0] // 2 - c_text.get_width() // 2, WIN_SIZE[1] // 2 - c_text.get_height() // 2 + 140))
+    screen.blit(d_text, (WIN_SIZE[0] // 2 - d_text.get_width() // 2, WIN_SIZE[1] // 2 - d_text.get_height() // 2 + 170))
+    screen.blit(e_text, (WIN_SIZE[0] // 2 - e_text.get_width() // 2, WIN_SIZE[1] // 2 - e_text.get_height() // 2 + 200))
+    screen.blit(f_text, (WIN_SIZE[0] // 2 - f_text.get_width() // 2, WIN_SIZE[1] // 2 - f_text.get_height() // 2 + 300))
     pygame.display.flip()
 
 def finish_screen():
