@@ -16,6 +16,7 @@ WIN_SIZE = 1000, 1000
 PLAYER_SIZE = 80, 80
 PLAYER_INIT_POS = 470, 845
 TILE_SIZE = 100
+
 STATE_START_MENU = 0
 STATE_PLAYING = 1
 STATE_FINISHED = 2
@@ -59,6 +60,24 @@ def draw_score(score, max_score):
 def load_collision_map(filename):
     with open(filename, 'r') as file:
         return [list(line.strip()) for line in file]
+
+def start_menu():
+    screen.fill((0, 0, 0))
+    title_text = font.render("House Burn", True, (255, 0, 0))
+    prompt_text = font.render("Press ENTER to start", True, (255, 255, 255))
+    screen.blit(title_text, (WIN_SIZE[0] // 2 - title_text.get_width() // 2, WIN_SIZE[1] // 2 - title_text.get_height() // 2 - 50))
+    screen.blit(prompt_text, (WIN_SIZE[0] // 2 - prompt_text.get_width() // 2, WIN_SIZE[1] // 2 - prompt_text.get_height() // 2 + 50))
+    pygame.display.flip()
+
+def finish_screen():
+    screen.fill((0, 0, 0))
+    congrats_text = font.render("Congratulations!", True, (255, 255, 0))
+    done_text = font.render("You have burned the house!", True, (255, 255, 255))
+    screen.blit(congrats_text, (WIN_SIZE[0] // 2 - congrats_text.get_width() // 2, WIN_SIZE[1] // 2 - congrats_text.get_height() // 2 - 50))
+    screen.blit(done_text, (WIN_SIZE[0] // 2 - done_text.get_width() // 2, WIN_SIZE[1] // 2 - done_text.get_height() // 2 + 50))
+    prompt_text = font.render("Press ENTER to restart", True, (255, 255, 255))
+    screen.blit(prompt_text, (WIN_SIZE[0] // 2 - prompt_text.get_width() // 2, WIN_SIZE[1] // 2 - prompt_text.get_height() // 2 + 150))
+    pygame.display.flip()
 
 def show_message(value):
     global cans, already_printed, game_state
@@ -117,25 +136,8 @@ def print_bidon(collision_map, rect):
             if cell_value in '2345678' and not my_dict[cell_value]:
                 screen.blit(bidon_image, (x * TILE_SIZE, y * TILE_SIZE))
 
-def start_menu():
-    screen.fill((0, 0, 0))
-    title_text = font.render("House Burn", True, (255, 0, 0))
-    prompt_text = font.render("Press ENTER to start", True, (255, 255, 255))
-    screen.blit(title_text, (WIN_SIZE[0] // 2 - title_text.get_width() // 2, WIN_SIZE[1] // 2 - title_text.get_height() // 2 - 50))
-    screen.blit(prompt_text, (WIN_SIZE[0] // 2 - prompt_text.get_width() // 2, WIN_SIZE[1] // 2 - prompt_text.get_height() // 2 + 50))
-    pygame.display.flip()
-
-def finish_screen():
-    screen.fill((0, 0, 0))
-    congrats_text = font.render("Congratulations!", True, (255, 255, 0))
-    done_text = font.render("You have burned the house!", True, (255, 255, 255))
-    screen.blit(congrats_text, (WIN_SIZE[0] // 2 - congrats_text.get_width() // 2, WIN_SIZE[1] // 2 - congrats_text.get_height() // 2 - 50))
-    screen.blit(done_text, (WIN_SIZE[0] // 2 - done_text.get_width() // 2, WIN_SIZE[1] // 2 - done_text.get_height() // 2 + 50))
-    pygame.display.flip()
-
-
 def main():
-    global cans, already_printed
+    global cans, already_printed, game_state
     clock = pygame.time.Clock()
     game_state = STATE_START_MENU
 
